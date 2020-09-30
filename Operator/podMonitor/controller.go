@@ -377,19 +377,19 @@ func createPodForCRD(pm *lsalabv1.PodMonitor) *corev1.Pod {
 		c := &podTem.Containers[i]
 		c.Env = append( c.Env,
 				corev1.EnvVar{
-					Name: "PODMONTOR_NAMESPACE",
+					Name: "PODMONITOR_NAMESPACE",
 					Value: pm.Namespace,
 				},
 				corev1.EnvVar{
-					Name: "PODMONTOR_NAME",
+					Name: "PODMONITOR_NAME",
 					Value: pm.Name,
 				},
 				corev1.EnvVar{
-					Name: "PODMONTOR_SPEED",
+					Name: "PODMONITOR_SPEED",
 					Value: strconv.Itoa(int(pm.Spec.Speed)),
 				},
 				corev1.EnvVar{
-					Name: "PODMONTOR_LOGDIR",
+					Name: "PODMONITOR_LOGDIR",
 					Value: pm.Spec.LogDir,
 				},
 		)

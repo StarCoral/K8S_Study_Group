@@ -17,48 +17,48 @@ import (
 )
 
 var (
-	podmontor_namespace string = "default"
-	podmontor_name      string
-	podmontor_logdir    string = "./log"
-	podmontor_speed	    int32 = 30
-	podmontor_logpath   string
+	podmonitor_namespace string = "default"
+	podmonitor_name      string
+	podmonitor_logdir    string = "./log"
+	podmonitor_speed	    int32 = 30
+	podmonitor_logpath   string
 )
 
 
 func init() {
-	podmontor_namespace = os.Getenv("PODMONTOR_NAMESPACE")
-	podmontor_name = os.Getenv("PODMONTOR_NAME")
-	podmontor_logdir = os.Getenv("PODMONTOR_LOGDIR")
-	speed_string := os.Getenv("PODMONTOR_SPEED")
+	podmonitor_namespace = os.Getenv("PODMONITOR_NAMESPACE")
+	podmonitor_name = os.Getenv("PODMONITOR_NAME")
+	podmonitor_logdir = os.Getenv("PODMONITOR_LOGDIR")
+	speed_string := os.Getenv("PODMONITOR_SPEED")
 	ps, err := strconv.ParseInt(speed_string, 10, 64)
-	podmontor_speed = int32(ps)
+	podmonitor_speed = int32(ps)
 	if err != nil {
-		klog.Info("podmontor_speed change error, to be default 30 sec.")
+		klog.Info("podmonitor_speed change error, to be default 30 sec.")
 	}
-	if podmontor_name == "" {
+	if podmonitor_name == "" {
 		klog.Fatalf("The Environmental variables are losts")
 	}
-	podmontor_logpath = filepath.Join(podmontor_logdir,"/",podmontor_name)
+	podmonitor_logpath = filepath.Join(podmonitor_logdir,"/",podmonitor_name)
 	klog.Info("===Setting up Environmental variables ===")
-	klog.Info("Pod is ",podmontor_namespace," ",podmontor_name)
-	klog.Info("Log file will store in ",podmontor_logpath)
-	klog.Info("Sampling speed: ", podmontor_speed, " sec.")
+	klog.Info("Pod is ",podmonitor_namespace," ",podmonitor_name)
+	klog.Info("Log file will store in ",podmonitor_logpath)
+	klog.Info("Sampling speed: ", podmonitor_speed, " sec.")
 }
 
 func main() {
 	
 	// create the file
-	os.Mkdir(podmontor_logdir, 0755)
-	file, err := os.OpenFile(podmontor_logpath, os.O_WRONLY|os.O_APPEND|os.O_CREATE,0600)
+	os.Mkdir(podmonitor_logdir, 0755)
+	file, err := os.OpenFile(podmonitor_logpath, os.O_WRONLY|os.O_APPEND|os.O_CREATE,0600)
 	if err != nil {
 		fmt.Println("Can't open the file")
 	}
 	defer file.Close()
 
-	msg := fmt.Sprintf("============ %s / %s ============ \n", podmontor_namespace, podmontor_name)
+	msg := fmt.Sprintf("============ %s / %s ============ \n", podmonitor_namespace, podmonitor_name)
 	klog.Info(msg)
 	file.WriteString(msg)
-	// klog.Info("============", podmontor_namespace, " / ", podmontor_name, "============")
+	// klog.Info("============", podmonitor_namespace, " / ", podmonitor_name, "============")
 	
 	// get the config by the variables (KUBERNETES_SERVICE_HOST KUBERNETES_SERVICE_PORT)
 	config, err := rest.InClusterConfig()
@@ -76,7 +76,7 @@ func main() {
 	}
 	
 	for {
-		pod, err := clientset.CoreV1().Pods(podmontor_namespace).Get(podmontor_name, metav1.GetOptions{})
+		pod, err := clientset.CoreV1().Pods(podmonitor_namespace).Get(podmonitor_name, metav1.GetOptions{})
 		if err != nil {
 			klog.Info(err)
 			continue
@@ -93,7 +93,7 @@ func main() {
 			file.WriteString("Done.\n")
 			break
 		}
-		podMetrics, err := mc.MetricsV1beta1().PodMetricses(podmontor_namespace).Get(podmontor_name, metav1.GetOptions{})
+		podMetrics, err := mc.MetricsV1beta1().PodMetricses(podmonitor_namespace).Get(podmonitor_name, metav1.GetOptions{})
 		if err != nil {
 			klog.Info(err)
 		}
@@ -108,7 +108,7 @@ func main() {
 				// klog.Infof("Container Name: %s \t CPU usage: %d \t Memory usage: %d", container.Name, cpuQuantity, memQuantity)
 				file.WriteString(msg)
 		}
-		time.Sleep(time.Duration(podmontor_speed)*time.Second)
+		time.Sleep(time.Duration(podmonitor_speed)*time.Second)
 		
 	}
 	
