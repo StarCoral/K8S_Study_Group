@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: podtest01
+  labels:
+    env: test
+spec:
+  containers:
+  - name: podtest01
+    image: nginx
+    imagePullPolicy: Always
+---
+apiVersion: lsalab.nthu/v1
+kind: PodMonitor
+metadata:
+  name: podtest01  
+spec:
+  speed: 30
+  logdir: "log"
+
+  
