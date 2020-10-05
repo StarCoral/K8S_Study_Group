@@ -1,0 +1,12 @@
+domain: lsalab.nthu
+layout: go.kubebuilder.io/v2
+multigroup: true
+projectName: podmonitor-operator
+repo: github.com/NTHU-LSALAB/podMonitor-operator
+resources:
+- group: lsalab.nthu
+  kind: PodMonitor
+  version: v1
+version: 3-alpha
+plugins:
+  go.sdk.operatorframework.io/v2-alpha: {}

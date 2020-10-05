@@ -1,0 +1,7 @@
+apiVersion: lsalab.nthu.lsalab.nthu/v1
+kind: PodMonitor
+metadata:
+  name: podmonitor-sample
+spec:
+  # Add fields here
+  foo: bar
