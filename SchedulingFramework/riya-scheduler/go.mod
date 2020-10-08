@@ -22,7 +22,7 @@ require (
 	k8s.io/client-go v0.17.3
 	k8s.io/klog v1.0.0
 	k8s.io/kubernetes v1.17.3
-	k8s.io/metrics v0.17.3
+	k8s.io/metrics v0.17.3 // indirect
 	k8s.io/utils v0.0.0-20191114200735-6ca3b61696b6 // indirect
 )
 
