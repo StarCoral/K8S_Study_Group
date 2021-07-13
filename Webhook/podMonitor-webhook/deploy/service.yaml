@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: podmonitor-webhook-svc
+  labels:
+    app: podmonitor-webhook
+spec:
+  ports:
+  - port: 443
+    targetPort: 443
+    nodePort: 30443
+  type: NodePort
+  selector:
+    app: podmonitor-webhook

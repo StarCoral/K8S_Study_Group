@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: podtest02
+  annotations:
+    podmonitor-webhook.nthu.lsalab: "true"
+  labels:
+    env: test
+spec:
+  # serviceAccountName: podmonitor-metricstest
+  containers:
+  - name: podtest02
+    image: busybox
+    command: ["sleep", "3600"]
+    imagePullPolicy: IfNotPresent
+#   - name: monitor
+#     image: riyazhu/podmonitor:latest
+#     env:
+#       - name: PODMONITOR_NAMESPACE
+#         value: "default"
+#       - name: PODMONITOR_NAME
+#         value: "podtest01"
+#       - name: PODMONITOR_LOGDIR
+#         value: "log"
+#       - name: PODMONITOR_SPEED
+#         value: "30"
+# ---
+# kind: ClusterRoleBinding
+# apiVersion: rbac.authorization.k8s.io/v1
+# metadata:
+#   name: monitor-pod
+# subjects:
+# - kind: ServiceAccount
+#   name: default
+#   namespace: default
+# roleRef:
+#   kind: ClusterRole
+#   name: podmonitor-metricstest
+#   apiGroup: rbac.authorization.k8s.io

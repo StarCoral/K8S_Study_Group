@@ -1,0 +1,14 @@
+#!/bin/bash
+
+: ${DOCKER_USER:? required}
+
+export GO111MODULE=on
+
+# build webhook
+CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o podmonitor-webhook ../cmd/main.go
+#go build -o podmonitor-webhook ../cmd/main.go
+# build docker image
+docker build --no-cache -t ${DOCKER_USER}/podmonitor-webhook:v1 .
+rm -rf podmonitor-webhook
+
+docker push ${DOCKER_USER}/podmonitor-webhook:v1

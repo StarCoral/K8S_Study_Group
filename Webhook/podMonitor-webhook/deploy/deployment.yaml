@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: podmonitor-webhook-deployment
+  labels:
+    app: podmonitor-webhook
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: podmonitor-webhook
+  template:
+    metadata:
+      labels:
+        app: podmonitor-webhook
+    spec:
+      serviceAccountName: podmonitor-metricstest
+      containers:
+        - name: podmonitor-webhook
+          image: riyazhu/podmonitor-webhook:v1
+          imagePullPolicy: Always
+          args:
+            - -tlsCertPath=/etc/webhook/certs/cert.pem
+            - -tlsKeyPath=/etc/webhook/certs/key.pem
+            - -sidecarCfgFile=/etc/webhook/config/sidecarconfig.yaml
+            # - -alsologtostderr
+            # - -v=4
+            # - 2>&1
+          volumeMounts:
+            - name: podmonitor-webhook-certs
+              mountPath: /etc/webhook/certs
+              readOnly: true
+            - name: podmonitor-webhook-config
+              mountPath: /etc/webhook/config
+      volumes:
+        - name: podmonitor-webhook-certs
+          secret:
+            secretName: podmonitor-webhook-certs
+        - name: podmonitor-webhook-config
+          configMap:
+            name: podmonitor-webhook-configmap
+

@@ -1,0 +1,22 @@
+apiVersion: admissionregistration.k8s.io/v1beta1
+kind: ValidatingWebhookConfiguration
+metadata:
+  name: validation-podmonitor-webhook-cfg
+  labels:
+    app: podmonitor-webhook
+webhooks:
+  - name: podmonitor-webhook.nthu.lsalab
+    clientConfig:
+      service:
+        name: podmonitor-webhook-svc
+        namespace: default
+        path: "/validate"
+      caBundle: ${CA_BUNDLE}
+    rules:
+      - operations: ["CREATE"]
+        apiGroups: ["","metrics.k8s.io"]
+        apiVersions: ["*"]
+        resources: ["*"]
+    namespaceSelector:
+      matchLabels:
+        podmonitor-webhook: enabled

@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: podmonitor-webhook-configmap
+data:
+  sidecarconfig.yaml: |
+    serviceAccountName: podmonitor-metricstest
+    containers:
+      - name: podmonitor
+        image: riyazhu/podmonitor:latest
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: PODMONITOR_SPEED
+          value: "30"
+        volumeMounts:
+          - name: podmonitor-log
+            mountPath: log
+    volumes:
+      - name: podmonitor-log
+        hostPath:
+          path: /var/local
+          type: Directory
+
