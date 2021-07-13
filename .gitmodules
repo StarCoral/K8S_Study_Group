@@ -1,0 +1,3 @@
+[submodule "DevicePlugin"]
+	path = DevicePlugin
+	url = git@github.com:StarCoral/k8s-device-plugin.git
