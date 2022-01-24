@@ -1,0 +1,67 @@
+# TODO: modify your own deployment.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: scheduler-config
+  namespace: kube-system
+data:
+  scheduler-config.yaml: |
+    apiVersion: kubescheduler.config.k8s.io/v1alpha1
+    kind: KubeSchedulerConfiguration
+    schedulerName: riya-scheduler
+    leaderElection:
+      leaderElect: true
+      lockObjectName: riya-scheduler
+      lockObjectNamespace: kube-system
+    plugins:
+      queueSort:
+        enabled:
+        - name: "riya"
+        disabled:
+        - name: "*"
+      preFilter:
+        enabled:
+        - name: "riya"
+      pluginConfig:
+      - name: "riya"
+        args: {"master": "master", "kubeconfig": "kubeconfig"}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: riya-scheduler
+  namespace: kube-system
+  labels:
+    component: riya-scheduler
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: riya-scheduler
+  template:
+    metadata:
+      labels:
+        component: riya-scheduler
+    spec:
+      serviceAccount: riya-sa
+      priorityClassName: system-cluster-critical
+      volumes:
+        - name: scheduler-config
+          configMap:
+            name: scheduler-config
+      containers:
+        - name: riya-scheduler
+          image: riyazhu/riya-scheduler:latest
+          imagePullPolicy: Always
+          args:
+            - riya-scheduler
+            - --config=/scheduler/scheduler-config.yaml
+            - --v=3
+          resources:
+            requests:
+              cpu: "50m"
+          volumeMounts:
+            - name: scheduler-config
+              mountPath: /scheduler
+      
+      
