@@ -83,7 +83,7 @@ $ kubectl get pod -n kube-system
         metadata:
         labels:
             app: nginx
-            podGroup: nginx
+            groupName nginx
             minAvailable: "3"
         spec:
         schedulerName: riya-scheduler
@@ -136,7 +136,7 @@ $ kubectl get pod -n kube-system
     template:
         metadata:
         labels:
-            podGroup: "Red"
+            groupName "Red"
             groupPriority: "1000"
             minAvailable: "2"
         spec:
@@ -165,7 +165,7 @@ $ kubectl get pod -n kube-system
     template:
         metadata:
         labels:
-            podGroup: "Green"
+            groupName "Green"
             groupPriority: "100"
             minAvailable: "2"
         spec:
@@ -194,7 +194,7 @@ $ kubectl get pod -n kube-system
     template:
         metadata:
         labels:
-            podGroup: "Yellow"
+            groupName "Yellow"
             groupPriority: "500"
             minAvailable: "2"
         spec:
@@ -246,7 +246,7 @@ $ kubectl get pod -n kube-system
     template:
         metadata:
         labels:
-            podGroup: "Hi"
+            groupName "Hi"
             groupPriority: "100"
             minAvailable: "2"
         spec:
@@ -276,7 +276,7 @@ $ kubectl get pod -n kube-system
     template:
         metadata:
         labels:
-            podGroup: "Hello"
+            groupName "Hello"
             groupPriority: "100"
             minAvailable: "2"
         spec:
@@ -331,7 +331,7 @@ $ kubectl get pod -n kube-system
     metadata:
     name: black-pusheen01
     labels:
-        podGroup: "pusheen"
+        groupName "pusheen"
         groupPriority: "100"
         minAvailable: "2"
     spec:
@@ -346,7 +346,7 @@ $ kubectl get pod -n kube-system
     metadata:
     name: gray-pusheen01
     labels:
-        podGroup: "pusheen"
+        groupName "pusheen"
         groupPriority: "100"
         minAvailable: "2"
     spec:
@@ -368,7 +368,7 @@ $ kubectl get pod -n kube-system
     metadata:
     name: white-pusheen01
     labels:
-        podGroup: "pusheen"
+        groupName "pusheen"
         groupPriority: "100"
         minAvailable: "2"
     spec:
@@ -390,7 +390,7 @@ $ kubectl get pod -n kube-system
     metadata:
     name: black-pusheen02
     labels:
-        podGroup: "pusheen"
+        groupName "pusheen"
         groupPriority: "100"
         minAvailable: "2"
     spec:
@@ -405,7 +405,7 @@ $ kubectl get pod -n kube-system
     metadata:
     name: white-pusheen02
     labels:
-        podGroup: "pusheen"
+        groupName "pusheen"
         groupPriority: "100"
         minAvailable: "2"
     spec:
@@ -427,7 +427,7 @@ $ kubectl get pod -n kube-system
     metadata:
     name: gray-pusheen02
     labels:
-        podGroup: "pusheen"
+        groupName "pusheen"
         groupPriority: "100"
         minAvailable: "2"
     spec:
@@ -449,7 +449,7 @@ $ kubectl get pod -n kube-system
     metadata:
     name: black-pusheen03
     labels:
-        podGroup: "pusheen"
+        groupName "pusheen"
         groupPriority: "100"
         minAvailable: "2"
     spec:
@@ -464,7 +464,7 @@ $ kubectl get pod -n kube-system
     metadata:
     name: white-pusheen03
     labels:
-        podGroup: "pusheen"
+        groupName "pusheen"
         groupPriority: "100"
         minAvailable: "2"
     spec:
@@ -486,7 +486,7 @@ $ kubectl get pod -n kube-system
     metadata:
     name: gray-pusheen03
     labels:
-        podGroup: "pusheen"
+        groupName "pusheen"
         groupPriority: "100"
         minAvailable: "2"
     spec:
@@ -509,7 +509,7 @@ $ kubectl get pod -n kube-system
     metadata:
     name: black-pusheen04
     labels:
-        podGroup: "pusheen"
+        groupName "pusheen"
         groupPriority: "100"
         minAvailable: "2"
     spec:
@@ -524,7 +524,7 @@ $ kubectl get pod -n kube-system
     metadata:
     name: white-pusheen04
     labels:
-        podGroup: "pusheen"
+        groupName "pusheen"
         groupPriority: "100"
         minAvailable: "2"
     spec:
@@ -546,7 +546,7 @@ $ kubectl get pod -n kube-system
     metadata:
     name: gray-pusheen04
     labels:
-        podGroup: "pusheen"
+        groupName "pusheen"
         groupPriority: "100"
         minAvailable: "2"
     spec:
@@ -568,7 +568,7 @@ $ kubectl get pod -n kube-system
     metadata:
     name: black-pusheen05
     labels:
-        podGroup: "pusheen"
+        groupName "pusheen"
         groupPriority: "100"
         minAvailable: "2"
     spec:
@@ -583,7 +583,7 @@ $ kubectl get pod -n kube-system
     metadata:
     name: white-pusheen05
     labels:
-        podGroup: "pusheen"
+        groupName "pusheen"
         groupPriority: "100"
         minAvailable: "2"
     spec:
@@ -605,7 +605,7 @@ $ kubectl get pod -n kube-system
     metadata:
     name: gray-pusheen05
     labels:
-        podGroup: "pusheen"
+        groupName "pusheen"
         groupPriority: "100"
         minAvailable: "2"
     spec:

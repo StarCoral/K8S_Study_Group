@@ -9,7 +9,7 @@ spec:
     metadata:
       labels:
         app: nginx
-        podGroup: nginx
+        groupName: nginx
         minAvailable: "3"
     spec:
             #      schedulerName: riya-scheduler

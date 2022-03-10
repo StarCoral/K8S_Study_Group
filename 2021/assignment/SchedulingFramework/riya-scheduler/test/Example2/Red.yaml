@@ -8,7 +8,7 @@ spec:
   template:
     metadata:
       labels:
-        podGroup: "Red"
+        groupName: "Red"
         groupPriority: "1000"
         minAvailable: "2"
     spec:
